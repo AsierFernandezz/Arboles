@@ -1,5 +1,10 @@
 package main;
 
-public class GestorArboles {
+import java.text.ParseException;
 
+public class GestorArboles {
+	
+	public void run()throws ParseException {
+		
+	}
 }
