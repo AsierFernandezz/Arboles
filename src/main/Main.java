@@ -8,6 +8,6 @@ public class Main {
 	public static void main(String[] args) throws ParseException, ClassNotFoundException, SQLException {
 		
 		GestorArboles ga = new GestorArboles();
-		ga.run(null);
+		ga.run();
 	}
 }

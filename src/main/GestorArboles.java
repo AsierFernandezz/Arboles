@@ -1,9 +1,8 @@
 package main;
 
-
-
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -20,13 +19,13 @@ public class GestorArboles {
 	final int UPDATE = 3;
 	final int VISUALIZAR = 4;
 	
-	String host = "localhost:3307"; 
+	String host = "localhost"; 
 	String BBDD = "programacion";
 	String usuario = "root";
 	String contrasenia = "";
 	
 	
-	public void run(ArrayList<Arbol> arboles)throws ParseException, ClassNotFoundException, SQLException {
+	public void run()throws ParseException, ClassNotFoundException, SQLException {
 		Scanner scan = new Scanner(System.in);
 		
 		int opcion;
@@ -41,7 +40,25 @@ public class GestorArboles {
 				break;
 				
 			case INSERTAR:
-				insertarArbol();
+				Arbol arbol = new Arbol();
+				System.out.println("Dame el nombre común del árbol");
+				arbol.setNombreComun(scan.nextLine());
+				
+				System.out.println("Dime el nombre cientifico del arbol");
+				arbol.setNombreCientifico(scan.nextLine());
+				
+				System.out.println("Dime el habitat");
+				arbol.setHabitat(scan.nextLine());
+				
+				System.out.println("Dime la altura");
+				arbol.setAltura(Integer.parseInt(scan.nextLine()));
+				
+				System.out.println("Dime el origen");
+				arbol.setOrigen(scan.nextLine());
+				
+				
+				
+				insertarArbol(arbol);
 				break;
 				
 			case UPDATE:
@@ -54,8 +71,8 @@ public class GestorArboles {
 			
 			case VISUALIZAR:
 				ArrayList<Arbol> arbole = arboles();
-				visualizarArboles(arboles);
-				
+				visualizarArboles(arbole);
+				break;
 				
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + opcion);
@@ -79,12 +96,12 @@ public class GestorArboles {
 		Statement st =  conexion.createStatement();
 		
 		//Ejecutar la consulta y recibir el resultado
-		ResultSet resultado= st.executeQuery("select * from tareas");
+		ResultSet resultado= st.executeQuery("select * from arboles");
 	
 		while(resultado.next()) {
 			Arbol arbol = new Arbol();
 			arbol.setId(resultado.getInt("id"));
-			arbol.setNombreComun("nombre");
+			arbol.setNombreComun("nombre_comun");
 			
 			arboles.add(arbol);
 		}
@@ -109,17 +126,27 @@ public class GestorArboles {
 		System.out.println(VISUALIZAR + "- Visualizar arboles");
 	}
 	
-	public void insertarArbol() throws ClassNotFoundException, SQLException {
-		//cargar la libreria mysql conector
+	public void insertarArbol(Arbol arbol) throws ClassNotFoundException, SQLException {
+			Scanner scan = new Scanner(System.in);	
+			
+			
+				//cargar la libreria mysql conector
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				
 				//crear la conexion
 				Connection conexion = DriverManager.getConnection("jdbc:mysql://" + host + "/" + BBDD, usuario, contrasenia);
+			
+	
+				String sql = "INSERT INTO arboles(nombre_comun, nombre_cientifico, habitat, altura, origen) VALUES (?,?,?,?,?)";
 				
-				//Crear el statement
-				Statement st =  conexion.createStatement();
+				PreparedStatement pst =  conexion.prepareStatement(sql);
+				pst.setString(1, arbol.getNombreComun());
+				pst.setString(2, arbol.getNombreCientifico());
+				pst.setString(3, arbol.getHabitat());
+				pst.setInt(4, arbol.getAltura());
+				pst.setString(5, arbol.getOrigen());
 				
-				String sql = ("INSERT INTO tareas(titulo, descripcion) VALUES ('titulo','descripcion')");
+				pst.executeUpdate(sql);
 				
 				
 	}
