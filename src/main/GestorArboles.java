@@ -57,7 +57,7 @@ public class GestorArboles {
 				arbol.setOrigen(scan.nextLine());
 				
 				
-				
+		/*		
 				insertarArbol(arbol);
 				break;
 				
@@ -73,7 +73,7 @@ public class GestorArboles {
 				ArrayList<Arbol> arbole = arboles();
 				visualizarArboles(arbole);
 				break;
-				
+		*/		
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + opcion);
 			}
@@ -126,7 +126,7 @@ public class GestorArboles {
 		System.out.println(VISUALIZAR + "- Visualizar arboles");
 	}
 	
-	public void insertarArbol(Arbol arbol) throws ClassNotFoundException, SQLException {
+	/*public void insertarArbol(Arbol arbol) throws ClassNotFoundException, SQLException {
 			Scanner scan = new Scanner(System.in);	
 			
 			
@@ -158,5 +158,6 @@ public class GestorArboles {
 	public void delete() {
 		
 	}
-	
+	*/
 }
+
