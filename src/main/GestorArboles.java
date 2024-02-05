@@ -19,7 +19,7 @@ public class GestorArboles {
 	final int UPDATE = 3;
 	final int VISUALIZAR = 4;
 	
-	String host = "localhost"; 
+	String host = "localhost:3307"; 
 	String BBDD = "programacion";
 	String usuario = "root";
 	String contrasenia = "";
