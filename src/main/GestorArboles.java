@@ -20,7 +20,7 @@ public class GestorArboles {
 	final int VISUALIZAR = 4;
 	
 	String host = "localhost:3307"; 
-	String BBDD = "programacion";
+	String BBDD = "eh-garden";
 	String usuario = "root";
 	String contrasenia = "";
 	
@@ -39,28 +39,10 @@ public class GestorArboles {
 				System.out.println("Saliendo del programa");
 				break;
 				
-			case INSERTAR:
-				Arbol arbol = new Arbol();
-				System.out.println("Dame el nombre común del árbol");
-				arbol.setNombreComun(scan.nextLine());
-				
-				System.out.println("Dime el nombre cientifico del arbol");
-				arbol.setNombreCientifico(scan.nextLine());
-				
-				System.out.println("Dime el habitat");
-				arbol.setHabitat(scan.nextLine());
-				
-				System.out.println("Dime la altura");
-				arbol.setAltura(Integer.parseInt(scan.nextLine()));
-				
-				System.out.println("Dime el origen");
-				arbol.setOrigen(scan.nextLine());
-				
-				
-		/*		
-				insertarArbol(arbol);
+			case INSERTAR:				
+				insertar();
 				break;
-				
+		/*		
 			case UPDATE:
 				update();
 				break;
@@ -73,7 +55,7 @@ public class GestorArboles {
 				ArrayList<Arbol> arbole = arboles();
 				visualizarArboles(arbole);
 				break;
-		*/		
+			*/	
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + opcion);
 			}
@@ -96,7 +78,7 @@ public class GestorArboles {
 		Statement st =  conexion.createStatement();
 		
 		//Ejecutar la consulta y recibir el resultado
-		ResultSet resultado= st.executeQuery("select * from arboles2");
+		ResultSet resultado= st.executeQuery("select * from arboles");
 	
 		while(resultado.next()) {
 			Arbol arbol = new Arbol();
@@ -109,13 +91,13 @@ public class GestorArboles {
 		return arboles;
 		
 	}
-	
+	/*
 	public void visualizarArboles(ArrayList<Arbol> arboles) {
 		for (Arbol arbol : arboles) {
 			System.out.println(arbol);	
 	}
 }
-	
+	*/
 	public void menu() {
 			
 		System.out.println("--Menu--");
@@ -126,7 +108,7 @@ public class GestorArboles {
 		System.out.println(VISUALIZAR + "- Visualizar arboles");
 	}
 	
-	/*public void insertarArbol(Arbol arbol) throws ClassNotFoundException, SQLException {
+	public void insertarArbol(Arbol arbol) throws ClassNotFoundException, SQLException {
 			Scanner scan = new Scanner(System.in);	
 			
 			
@@ -137,20 +119,60 @@ public class GestorArboles {
 				Connection conexion = DriverManager.getConnection("jdbc:mysql://" + host + "/" + BBDD, usuario, contrasenia);
 			
 	
-				String sql = "INSERT INTO arboles(nombre_comun, nombre_cientifico, habitat, altura, origen) VALUES (?,?,?,?,?)";
-				
+				String sql = "INSERT INTO arboles(nombre_comun, nombre_cientifico, id_habitat, altura, origen, singular , fecha_encontrado) VALUES (?,?,?,?,?,?,?)";
+
 				PreparedStatement pst =  conexion.prepareStatement(sql);
 				pst.setString(1, arbol.getNombreComun());
 				pst.setString(2, arbol.getNombreCientifico());
-				pst.setString(3, arbol.getHabitat());
+				pst.setInt(3, arbol.getId_Habitat());
 				pst.setInt(4, arbol.getAltura());
 				pst.setString(5, arbol.getOrigen());
+				pst.setString(6, arbol.getSingular());
+				pst.setString(7, arbol.getFecha_encontrada());
 				
-				pst.executeUpdate(sql);
+				pst.executeUpdate();
 				
+			
 				
 	}
 	
+	public void insertar() {
+		Scanner scan = new Scanner(System.in);
+		Arbol arbolea = new Arbol();
+		
+		System.out.println("Dame el nombre común del árbol");
+		arbolea.setNombreComun(scan.nextLine());
+		
+		System.out.println("Dime el nombre cientifico del arbol");
+		arbolea.setNombreCientifico(scan.nextLine());
+		
+		System.out.println("Dime el id del habitat");
+		arbolea.setId_Habitat(Integer.parseInt(scan.nextLine()));
+		
+		System.out.println("Dime la altura");
+		arbolea.setAltura(Integer.parseInt(scan.nextLine()));
+		
+		System.out.println("Dime el origen");
+		arbolea.setOrigen(scan.nextLine());
+		
+		System.out.println("Dime la fecha");
+		arbolea.setFecha_encontrada(scan.nextLine());
+		
+		System.out.println("Dime si es singular");
+		arbolea.setSingular(scan.nextLine());
+		
+		try {
+			insertarArbol(arbolea);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+	}
+	/*
 	public void update() {
 		
 	}

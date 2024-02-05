@@ -1,27 +1,49 @@
 package objetos;
 
+import java.sql.Date;
+
 public class Arbol {
 	private int id;
 	private String nombreComun;
 	private String nombreCientifico;
-	private String habitat;
+	private int Id_habitat;
 	private int altura;
 	private String origen;
+	private String fecha_encontrada;
+	private String singular;
 	
 	
 	public Arbol() {
 		
 	}
 	
-	public Arbol(int id, String nombreComun, String nombreCientifico, String habitat, int altura, String origen) {
+	public Arbol(int id, String nombreComun, String nombreCientifico, int Id_habitat, int altura, String origen, String fecha_encontrada, String singular) {
 		this.id = id;
 		this.nombreComun = nombreComun;
 		this.nombreCientifico = nombreCientifico;
-		this.habitat = habitat;
+		this.Id_habitat = Id_habitat;
 		this.altura = altura;
 		this.origen = origen;
+		this.fecha_encontrada = fecha_encontrada;
+		this.singular = singular;
 	}
 	
+	public String getFecha_encontrada() {
+		return fecha_encontrada;
+	}
+
+	public void setFecha_encontrada(String fecha_encontrada) {
+		this.fecha_encontrada = fecha_encontrada;
+	}
+
+	public String getSingular() {
+		return singular;
+	}
+
+	public void setSingular(String singular) {
+		this.singular = singular;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -40,11 +62,11 @@ public class Arbol {
 	public void setNombreCientifico(String nombreCientifico) {
 		this.nombreCientifico = nombreCientifico;
 	}
-	public String getHabitat() {
-		return habitat;
+	public int getId_Habitat() {
+		return Id_habitat;
 	}
-	public void setHabitat(String habitat) {
-		this.habitat = habitat;
+	public void setId_Habitat(int Id_habitat) {
+		this.Id_habitat = Id_habitat;
 	}
 	public int getAltura() {
 		return altura;
@@ -62,7 +84,7 @@ public class Arbol {
 	@Override
 	public String toString() {
 		return "Arbol [id=" + id + ", nombreComun=" + nombreComun + ", nombreCientifico=" + nombreCientifico
-				+ ", habitat=" + habitat + ", altura=" + altura + ", origen=" + origen + "]";
+				+ ", habitat=" + Id_habitat + ", altura=" + altura + ", origen=" + origen + "]";
 	}
 	
 	
