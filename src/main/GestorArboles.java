@@ -19,7 +19,7 @@ public class GestorArboles {
 	final int UPDATE = 3;
 	final int VISUALIZAR = 4;
 	
-	String host = "localhost"; 
+	String host = "localhost:3307"; 
 	String BBDD = "programacion";
 	String usuario = "root";
 	String contrasenia = "";
@@ -96,7 +96,7 @@ public class GestorArboles {
 		Statement st =  conexion.createStatement();
 		
 		//Ejecutar la consulta y recibir el resultado
-		ResultSet resultado= st.executeQuery("select * from arboles");
+		ResultSet resultado= st.executeQuery("select * from arboles2");
 	
 		while(resultado.next()) {
 			Arbol arbol = new Arbol();
