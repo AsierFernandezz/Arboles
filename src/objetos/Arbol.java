@@ -11,6 +11,7 @@ public class Arbol {
 	private String origen;
 	private String fecha_encontrada;
 	private String singular;
+	private Habitat habitat;
 	
 	
 	public Arbol() {
@@ -79,6 +80,23 @@ public class Arbol {
 	}
 	public void setOrigen(String origen) {
 		this.origen = origen;
+	}
+	
+
+	public int getId_habitat() {
+		return Id_habitat;
+	}
+
+	public void setId_habitat(int id_habitat) {
+		Id_habitat = id_habitat;
+	}
+
+	public Habitat getHabitat() {
+		return habitat;
+	}
+
+	public void setHabitat(Habitat habitat) {
+		this.habitat = habitat;
 	}
 
 	@Override

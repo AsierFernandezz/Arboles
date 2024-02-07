@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import objetos.Arbol;
+import objetos.Habitat;
 
 public class GestorArboles {
 	final int SALIR = 0;
@@ -50,12 +51,12 @@ public class GestorArboles {
 			case ELIMINAR:
 				delete();
 				break;
-			
+			*/
 			case VISUALIZAR:
 				ArrayList<Arbol> arbole = arboles();
 				visualizarArboles(arbole);
 				break;
-			*/	
+		
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + opcion);
 			}
@@ -91,13 +92,13 @@ public class GestorArboles {
 		return arboles;
 		
 	}
-	/*
+	
 	public void visualizarArboles(ArrayList<Arbol> arboles) {
 		for (Arbol arbol : arboles) {
 			System.out.println(arbol);	
 	}
 }
-	*/
+	
 	public void menu() {
 			
 		System.out.println("--Menu--");
@@ -160,6 +161,11 @@ public class GestorArboles {
 		
 		System.out.println("Dime si es singular");
 		arbolea.setSingular(scan.nextLine());
+		
+		Habitat h = new Habitat();
+		
+		h.setId(arbolea.getId_Habitat());
+		arbolea.setHabitat(h);
 		
 		try {
 			insertarArbol(arbolea);
